@@ -617,7 +617,7 @@ namespace cryptonote
     return p;
   }
   //---------------------------------------------------------------
-  bool generate_genesis_block(block& bl)
+  bool generateGenesisBlock(block& bl)
   {
     //genesis block
     bl = boost::value_initialized<block>();
@@ -635,6 +635,15 @@ namespace cryptonote
     //miner::find_nonce_for_given_block(bl, 1, 0);
     return true;
   }
+  bool generateTestnetGenesisBlock(cryptonote::block& b) {
+    if (!generateGenesisBlock(b)) {
+      return false;
+    }
+
+    b.nonce += 1;
+    return true;
+  }
+
   //---------------------------------------------------------------
   bool get_block_longhash(crypto::cn_context &context, const block& b, crypto::hash& res, uint64_t height)
   {
